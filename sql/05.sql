@@ -6,3 +6,24 @@
  * Create a select statement that lists the titles of all tables with the 'Trailers' special_feature.
  * Inner join the queries above.
  */
+select title 
+from (
+    select title
+    from (
+    select title, film_id,
+    unnest(special_features)
+    from film) as t
+    where unnest = 'Behind the Scenes'
+) c
+inner join 
+(select title 
+from (
+    select title 
+    from (
+        select title, film_id,
+        unnest(special_features)
+        from film) as b 
+    where unnest = 'Trailers') a ) t1
+using (title)
+order by title;
+
